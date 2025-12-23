@@ -1,0 +1,2 @@
+# SlugSync-docmentation
+slugsync
