@@ -52,6 +52,41 @@ The FastAPI backend and database are deployed on Render, a cloud platform that h
 - Filtering and query logic for efficient event retrieval
 
 - Backend API with event CRUD operations: Link To API Documentation Page --> https://slugsync-1.onrender.com/docs?
+## Authentication & Authorization Model
+
+SlugSync uses **role-based authentication** to ensure that only verified club representatives can manage events, while regular students retain read-only access.
+
+### User Roles
+- **Student (default)**  
+  - Can browse events, search, filter, and favorite events  
+  - Cannot create, edit, or delete events  
+
+- **Club Representative (Host)**  
+  - Can create new events  
+  - Can edit and delete **only the events they personally created**  
+  - Cannot modify events posted by other clubs or representatives  
+
+### Authentication Flow
+- Users sign in using their **UCSC email (@ucsc.edu)** via Google OAuth
+- Upon successful authentication, the backend issues a **JWT (JSON Web Token)**
+- This token is sent with every authenticated request and validated by the backend
+
+### Authorization Logic
+Event modification endpoints enforce **ownership-based access control**:
+- Each event is linked to the user who created it (`owner_id`)
+- For update or delete actions, the backend verifies:
+  1. The user is authenticated  
+  2. The user has **host privileges**  
+  3. The event’s `owner_id` matches the requesting user’s ID  
+
+If any of these checks fail, the request is rejected.
+
+### Why This Matters
+- Prevents unauthorized users from posting or modifying events  
+- Ensures clubs can only manage their own content  
+- Mirrors real-world permission systems used in production applications  
+
+This approach balances **security**, **fair access**, and **ease of use**, while keeping the system scalable as more organizations join the platform.
 
 ## Application Screenshots (Screenshots will be added)
 
