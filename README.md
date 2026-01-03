@@ -39,13 +39,14 @@ The FastAPI backend and database are deployed on Render, a cloud platform that h
 - RESTful FastAPI backend supporting full CRUD operations for events:
 (ADD SCREENSHOTS FROM RENDER)
   - Create:Authorized club representatives will post events through an API
-
-  - Read:Users can retrieve event listings and details
-
+  ![Create Event HTTPS Request](docs/create_event.png)
+  - Read:Users can retrieve all event listings and details about a specific event
+  ![Read General View](docs/read_general_event_view.png)
+  ![Read Event Details](docs/read_event_details.png)
   - Update:Event data can be modified by authorized users
-
+  ADD SS
   - Delete:Events can be removed through authorized requests
-
+  ![Delete Event HTTPS Request](docs/delete_event.png)
 - Authentication and role-based access control (host vs. student)
 
 - Filtering and query logic for efficient event retrieval
